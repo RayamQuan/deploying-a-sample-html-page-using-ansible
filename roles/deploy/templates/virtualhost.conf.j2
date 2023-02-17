@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+#    ServerAdmin voldar.email@gmail.com
+    ServerName 172.31.13.133
+#    ServerAlias www.mivopor.me
+    DocumentRoot /var/www/example.com/index.html
+    <Directory /var/www/example.com>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    <IfModule mod_dir.c>
+        DirectoryIndex index.php index.pl index.cgi index.html index.xhtml index.htm
+    </IfModule>
+</VirtualHost>

@@ -1,0 +1,8 @@
+---
+# handlers file for deploy
+- name: Start service apache2, if not started
+  service:
+    name: apache2
+    enabled: yes
+    state: restarted
+

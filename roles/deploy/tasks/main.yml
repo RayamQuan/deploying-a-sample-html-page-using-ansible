@@ -1,0 +1,40 @@
+---
+- name: "update apt packages."
+  apt:
+    update_cache: yes
+
+- name: "upgrade packages"
+  apt:
+    upgrade: yes
+
+- name: Remove unnecessary dependencies
+  apt:
+      autoremove: yes
+
+- name: Installing apache2
+  apt:
+      name: apache2
+      state: latest
+      update-cache: yes
+
+- name: Creating a web directory 
+  file:
+    path: /var/www/example.com
+    state: directory
+    mode: 0755
+
+- name: Copying index. html file to example. com
+  copy:
+       src: index.html
+       dest: /var/www/example.com/index.html
+
+- name: Copying config file to server
+  template:
+       src: virtualhost.conf.j2
+       dest: /etc/apache2/sites-available/virtualhost.conf
+
+- name: Creating and configuring virtual host
+  shell: |
+              a2ensite example.com.conf
+              a2dissite 000-default.conf
+              systemctl restart apache2
